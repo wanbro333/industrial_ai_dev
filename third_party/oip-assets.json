@@ -1,0 +1,452 @@
+{
+  "repository": "https://github.com/Open-Industry-Project/Open-Industry-Project",
+  "commit": "d3bcbd453a31086b83c5bad313475df3179f31f9",
+  "license": "MIT",
+  "conversion": "Blender GLB import, recenter existing meshes, FBX export; no original textures",
+  "assets": [
+    {
+      "file": "unity/Assets/Resources/Industrial/Gantry_Leg_Base.fbx",
+      "source": "assets/3DModels/Gantry/Gantry.glb",
+      "node": "Leg_Base",
+      "source_sha256": "2190483dc69fddc346c4b53045613ff6c0b3651fa7ee628c82b3708cc6f933e1",
+      "sha256": "c1a56c4ba0a1d2173e7c379287f63181db173b7279187c4874e97d8e177d289d",
+      "unity_size_m": [
+        0.4000000059604645,
+        0.201236754655838,
+        0.4000000059604645
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/Gantry_Beam_Main.fbx",
+      "source": "assets/3DModels/Gantry/Gantry.glb",
+      "node": "Beam_Main",
+      "source_sha256": "2190483dc69fddc346c4b53045613ff6c0b3651fa7ee628c82b3708cc6f933e1",
+      "sha256": "1fdfdadd4b16f9fd4f8168a3b550fae73b93d9fe8ce4528126bae5b6a381cc14",
+      "unity_size_m": [
+        3.9983749389648438,
+        0.16463136672973633,
+        0.20000004768371582
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/Gantry_Beam_MainCarriage_01.fbx",
+      "source": "assets/3DModels/Gantry/Gantry.glb",
+      "node": "Beam_MainCarriage_01",
+      "source_sha256": "2190483dc69fddc346c4b53045613ff6c0b3651fa7ee628c82b3708cc6f933e1",
+      "sha256": "3e67bb15a711ae95ad9fe15da81d3d063e5253ceef8b1df7d5627f2f922c4e12",
+      "unity_size_m": [
+        0.29762178659439087,
+        0.404114305973053,
+        0.36439943313598633
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/Gantry_Beam_Lift.fbx",
+      "source": "assets/3DModels/Gantry/Gantry.glb",
+      "node": "Beam_Lift",
+      "source_sha256": "2190483dc69fddc346c4b53045613ff6c0b3651fa7ee628c82b3708cc6f933e1",
+      "sha256": "f455247257894437f2a7fc17548e789f4d917f8070d048bb9283574141ce9ec4",
+      "unity_size_m": [
+        0.1000003069639206,
+        3.999238967895508,
+        0.10000020265579224
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/Gantry_Carriage.fbx",
+      "source": "assets/3DModels/Gantry/Gantry.glb",
+      "node": "Carriage",
+      "source_sha256": "2190483dc69fddc346c4b53045613ff6c0b3651fa7ee628c82b3708cc6f933e1",
+      "sha256": "c3df434db1d8726d07144398da4868811c0ad4851c920a052aca050450479f49",
+      "unity_size_m": [
+        0.5400397777557373,
+        0.7500000596046448,
+        0.48963311314582825
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/Gantry_Tool_01.fbx",
+      "source": "assets/3DModels/Gantry/Gantry.glb",
+      "node": "Tool_01",
+      "source_sha256": "2190483dc69fddc346c4b53045613ff6c0b3651fa7ee628c82b3708cc6f933e1",
+      "sha256": "1b79f6a6fe2af49bc7ac481b63e9fa8bd4324c7a4582682933a9e178e4f91c8d",
+      "unity_size_m": [
+        0.21442627906799316,
+        0.24494938552379608,
+        0.21442639827728271
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/Gantry_Leg_Main.fbx",
+      "source": "assets/3DModels/Gantry/Gantry.glb",
+      "node": "Leg_Main",
+      "source_sha256": "2190483dc69fddc346c4b53045613ff6c0b3651fa7ee628c82b3708cc6f933e1",
+      "sha256": "f075525817aa5c72d7132c5869e74d1aa35eb157dd62af6ce5ed424737ce6862",
+      "unity_size_m": [
+        0.125,
+        3.999999761581421,
+        0.12500017881393433
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/Gantry_Leg_Top.fbx",
+      "source": "assets/3DModels/Gantry/Gantry.glb",
+      "node": "Leg_Top",
+      "source_sha256": "2190483dc69fddc346c4b53045613ff6c0b3651fa7ee628c82b3708cc6f933e1",
+      "sha256": "4d31f4da56d91d47cce01187f2b6f401ff06957fb44014508ba4b86f3741f0b7",
+      "unity_size_m": [
+        0.25,
+        0.370201975107193,
+        0.2500000596046448
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/Gantry_Beam_Secondary.fbx",
+      "source": "assets/3DModels/Gantry/Gantry.glb",
+      "node": "Beam_Secondary",
+      "source_sha256": "2190483dc69fddc346c4b53045613ff6c0b3651fa7ee628c82b3708cc6f933e1",
+      "sha256": "644d7266714213febf09e8e6ce6086bf96125f7fffda52328ddd249006ad661c",
+      "unity_size_m": [
+        0.24264287948608398,
+        0.10000117123126984,
+        3.9999992847442627
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/Gantry_Beam_MainCarriage_02.fbx",
+      "source": "assets/3DModels/Gantry/Gantry.glb",
+      "node": "Beam_MainCarriage_02",
+      "source_sha256": "2190483dc69fddc346c4b53045613ff6c0b3651fa7ee628c82b3708cc6f933e1",
+      "sha256": "e69d99a53db8df13e1bd6930af29d9b437f47322074b61a064d97b1a2c48a333",
+      "unity_size_m": [
+        0.2976217269897461,
+        0.2513474225997925,
+        0.36439943313598633
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/BladeStop_BaseCornerR.fbx",
+      "source": "assets/3DModels/BladeStop/BladeStop.glb",
+      "node": "BaseCornerR",
+      "source_sha256": "47477f5f6a07e41dc634836625a159d849c56c93a75ac6373beae34fe6e4ba36",
+      "sha256": "d8427f1d3c951f94dfd3eca29a49e4713d2be1639969d737d9abdbdba9e40566",
+      "unity_size_m": [
+        0.4000000059604645,
+        0.9099994897842407,
+        0.20000004768371582
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/BladeStop_BladeCornerR.fbx",
+      "source": "assets/3DModels/BladeStop/BladeStop.glb",
+      "node": "BladeCornerR",
+      "source_sha256": "47477f5f6a07e41dc634836625a159d849c56c93a75ac6373beae34fe6e4ba36",
+      "sha256": "25747d6888ea209a9b34b7b299bdfd0d9b45634ee4aa06b65a8bca579c6457f4",
+      "unity_size_m": [
+        0.05016869306564331,
+        0.5733418464660645,
+        0.12751436233520508
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/BladeStop_BladeMiddle.fbx",
+      "source": "assets/3DModels/BladeStop/BladeStop.glb",
+      "node": "BladeMiddle",
+      "source_sha256": "47477f5f6a07e41dc634836625a159d849c56c93a75ac6373beae34fe6e4ba36",
+      "sha256": "d7ec2a942a1c77ab5d4c909b40668a6980d2181d218fc126823d0786fa812990",
+      "unity_size_m": [
+        0.05016869306564331,
+        0.24613243341445923,
+        2.0
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/BladeStop_BaseMiddle.fbx",
+      "source": "assets/3DModels/BladeStop/BladeStop.glb",
+      "node": "BaseMiddle",
+      "source_sha256": "47477f5f6a07e41dc634836625a159d849c56c93a75ac6373beae34fe6e4ba36",
+      "sha256": "d7913de47bad59ffac297cbff3336dd831294aa94ce9b421b56ea6d7dd9af4a3",
+      "unity_size_m": [
+        0.4000000059604645,
+        0.9099994897842407,
+        2.0
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/BladeStop_BaseCornerL.fbx",
+      "source": "assets/3DModels/BladeStop/BladeStop.glb",
+      "node": "BaseCornerL",
+      "source_sha256": "47477f5f6a07e41dc634836625a159d849c56c93a75ac6373beae34fe6e4ba36",
+      "sha256": "78a671b445e42836523c4cde17575059f03cd30723d1996cf27024308bdb3c8f",
+      "unity_size_m": [
+        0.4000000059604645,
+        0.9099994897842407,
+        0.20000004768371582
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/BladeStop_BladeCornerL.fbx",
+      "source": "assets/3DModels/BladeStop/BladeStop.glb",
+      "node": "BladeCornerL",
+      "source_sha256": "47477f5f6a07e41dc634836625a159d849c56c93a75ac6373beae34fe6e4ba36",
+      "sha256": "b3f02e5094bab854552b8fd655819e29b98f19a203e2d914f938fefadd6dbe4c",
+      "unity_size_m": [
+        0.05016869306564331,
+        0.5733418464660645,
+        0.12751436233520508
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/BladeStop_AirPressureL.fbx",
+      "source": "assets/3DModels/BladeStop/BladeStop.glb",
+      "node": "AirPressureL",
+      "source_sha256": "47477f5f6a07e41dc634836625a159d849c56c93a75ac6373beae34fe6e4ba36",
+      "sha256": "aeacfd88f2994cc1b6b4b6a1ca8563bd8aad65c86867d44a14ba872901458a6e",
+      "unity_size_m": [
+        0.10635006427764893,
+        0.2753550708293915,
+        0.10635006427764893
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/BladeStop_AirPressureR.fbx",
+      "source": "assets/3DModels/BladeStop/BladeStop.glb",
+      "node": "AirPressureR",
+      "source_sha256": "47477f5f6a07e41dc634836625a159d849c56c93a75ac6373beae34fe6e4ba36",
+      "sha256": "1b79bda55a59e44fbabb2bd3c2687d4c9e9c0a3d06a7165b6b859ad99c955350",
+      "unity_size_m": [
+        0.10635006427764893,
+        0.2753550708293915,
+        0.10635006427764893
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/DiffuseSensor_Body.fbx",
+      "source": "assets/3DModels/DiffuseSensor.glb",
+      "node": "Body",
+      "source_sha256": "13fa848bb57ca83d46e48d73d380f93ced8d39db11b2070586f56deadfdcf712",
+      "sha256": "5481463c225c4e15bdd44ed3c52ff856389773ee3642e2bf8c83bce5bcbdb047",
+      "unity_size_m": [
+        0.260004460811615,
+        0.7284594774246216,
+        0.4200001060962677
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/DiffuseSensor_Connector.fbx",
+      "source": "assets/3DModels/DiffuseSensor.glb",
+      "node": "Connector",
+      "source_sha256": "13fa848bb57ca83d46e48d73d380f93ced8d39db11b2070586f56deadfdcf712",
+      "sha256": "0cded6fcd0b9c5d826639e2a97dbffbadd36f0b0d7ddc4da0701570899a6c92c",
+      "unity_size_m": [
+        0.17983780801296234,
+        0.9200001358985901,
+        0.22047817707061768
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/DiffuseSensor_Diffuse.fbx",
+      "source": "assets/3DModels/DiffuseSensor.glb",
+      "node": "Diffuse",
+      "source_sha256": "13fa848bb57ca83d46e48d73d380f93ced8d39db11b2070586f56deadfdcf712",
+      "sha256": "a3c56ab9ff82fd8fd3a465390e5e675d3d9b8676d1f9399eaacf5b0f2fed862f",
+      "unity_size_m": [
+        0.22200000286102295,
+        0.40400001406669617,
+        0.030000001192092896
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/DiffuseSensor_Top.fbx",
+      "source": "assets/3DModels/DiffuseSensor.glb",
+      "node": "Top",
+      "source_sha256": "13fa848bb57ca83d46e48d73d380f93ced8d39db11b2070586f56deadfdcf712",
+      "sha256": "78e10cfeb5abe307ab55ff97c7ecdbe8997b9a206ac60b4a6ef1afb100c5270a",
+      "unity_size_m": [
+        0.25920820236206055,
+        0.044000089168548584,
+        0.381600022315979
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/Pallet_WoodPallet.fbx",
+      "source": "assets/3DModels/Pallet.glb",
+      "node": "WoodPallet",
+      "source_sha256": "dc7d6b79d98482fb65fb40996dc7169f489647b8c0899b128534c028b211fe01",
+      "sha256": "5b0a0ded95d75fc9e39951d9ecdafbaf114e331b39663e88b8478346704514b9",
+      "unity_size_m": [
+        1.2192151546478271,
+        0.13498911261558533,
+        1.0164299011230469
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/ChainTransfer_Base.fbx",
+      "source": "assets/3DModels/ChainTransfer/ChainTransfer.glb",
+      "node": "Base",
+      "source_sha256": "a36784798c6ce8a0720e84bfd243045d4dcb23d174d1f6944ad5f339fa9c4f07",
+      "sha256": "96bbc08444f665a27e18306cdd10220110d504c10663b2343e1d09cfc1e9e1a9",
+      "unity_size_m": [
+        2.0,
+        0.15613988041877747,
+        0.1207740530371666
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/ChainTransfer_Container.fbx",
+      "source": "assets/3DModels/ChainTransfer/ChainTransfer.glb",
+      "node": "Container",
+      "source_sha256": "a36784798c6ce8a0720e84bfd243045d4dcb23d174d1f6944ad5f339fa9c4f07",
+      "sha256": "e13b842f6b5117fb1d879b5937863014e0e7cdc124944eb202b29c7b7534688a",
+      "unity_size_m": [
+        2.0,
+        0.30000001192092896,
+        0.08366433531045914
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/ChainTransfer_Chain.fbx",
+      "source": "assets/3DModels/ChainTransfer/ChainTransfer.glb",
+      "node": "Chain",
+      "source_sha256": "a36784798c6ce8a0720e84bfd243045d4dcb23d174d1f6944ad5f339fa9c4f07",
+      "sha256": "b7a5b69f4828624dcdd82cd675e4ea69a103a96d123dad013eaa96f8ba587a80",
+      "unity_size_m": [
+        2.0,
+        0.2002929002046585,
+        0.029577083885669708
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/ChainTransfer_ChainL.fbx",
+      "source": "assets/3DModels/ChainTransfer/ChainTransfer.glb",
+      "node": "ChainL",
+      "source_sha256": "a36784798c6ce8a0720e84bfd243045d4dcb23d174d1f6944ad5f339fa9c4f07",
+      "sha256": "a0386f07cd34d71041e0c6bb634c0c421e1c2f81803f53902629080dcd8e1d7a",
+      "unity_size_m": [
+        0.11060869693756104,
+        0.20005002617835999,
+        0.029577083885669708
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/ChainTransfer_ChainR.fbx",
+      "source": "assets/3DModels/ChainTransfer/ChainTransfer.glb",
+      "node": "ChainR",
+      "source_sha256": "a36784798c6ce8a0720e84bfd243045d4dcb23d174d1f6944ad5f339fa9c4f07",
+      "sha256": "01f893d6c8c446ae85ca7f13fe0494880b800c18d3cf56269d6ae27b6867398b",
+      "unity_size_m": [
+        0.11060869693756104,
+        0.20005004107952118,
+        0.029577083885669708
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/ChainTransfer_WheelL.fbx",
+      "source": "assets/3DModels/ChainTransfer/ChainTransfer.glb",
+      "node": "WheelL",
+      "source_sha256": "a36784798c6ce8a0720e84bfd243045d4dcb23d174d1f6944ad5f339fa9c4f07",
+      "sha256": "18ee9731a59d4cab00c5632a93da5d36fda198c1caaefafb84359f2145c3e839",
+      "unity_size_m": [
+        0.14973735809326172,
+        0.14973728358745575,
+        0.02842205949127674
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/ChainTransfer_WheelR.fbx",
+      "source": "assets/3DModels/ChainTransfer/ChainTransfer.glb",
+      "node": "WheelR",
+      "source_sha256": "a36784798c6ce8a0720e84bfd243045d4dcb23d174d1f6944ad5f339fa9c4f07",
+      "sha256": "499be75c41290546d2ce2882fc1fb715c77e2abb91338ef79fe6a9d29457b9b9",
+      "unity_size_m": [
+        0.14973735809326172,
+        0.14973728358745575,
+        0.02842205949127674
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/ChainTransfer_ContainerEndL.fbx",
+      "source": "assets/3DModels/ChainTransfer/ChainTransfer.glb",
+      "node": "ContainerEndL",
+      "source_sha256": "a36784798c6ce8a0720e84bfd243045d4dcb23d174d1f6944ad5f339fa9c4f07",
+      "sha256": "a4e008fcace09a287d884353635825c5b84886fbdf8fbb9b49354c60410adaea",
+      "unity_size_m": [
+        0.10000002384185791,
+        0.30000001192092896,
+        0.08366433531045914
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/ChainTransfer_ContainerEndR.fbx",
+      "source": "assets/3DModels/ChainTransfer/ChainTransfer.glb",
+      "node": "ContainerEndR",
+      "source_sha256": "a36784798c6ce8a0720e84bfd243045d4dcb23d174d1f6944ad5f339fa9c4f07",
+      "sha256": "f9bb3adee3528e9408e2665863156dc8f9fecbe78ff2b88ed1ca9b9dc4fc01aa",
+      "unity_size_m": [
+        0.10000002384185791,
+        0.30000001192092896,
+        0.08366433531045914
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/ChainTransfer_BaseEndR.fbx",
+      "source": "assets/3DModels/ChainTransfer/ChainTransfer.glb",
+      "node": "BaseEndR",
+      "source_sha256": "a36784798c6ce8a0720e84bfd243045d4dcb23d174d1f6944ad5f339fa9c4f07",
+      "sha256": "8e8273a3ac6f23cb6cd99b48cbf9debded888133278d7041ddbf37e09185051c",
+      "unity_size_m": [
+        0.10955929756164551,
+        0.15613988041877747,
+        0.24956512451171875
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/ChainTransfer_BaseEndL.fbx",
+      "source": "assets/3DModels/ChainTransfer/ChainTransfer.glb",
+      "node": "BaseEndL",
+      "source_sha256": "a36784798c6ce8a0720e84bfd243045d4dcb23d174d1f6944ad5f339fa9c4f07",
+      "sha256": "a6fcd68b370dc53446d3e641e1edd178d4ff81ae4266e489af346bb017834327",
+      "unity_size_m": [
+        0.10955929756164551,
+        0.15613988041877747,
+        0.24956512451171875
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/LegsBar_LegsBar.fbx",
+      "source": "assets/3DModels/LegsBar.glb",
+      "node": "LegsBar",
+      "source_sha256": "e654c4347b24f7b8be00cf6c78b8a05001b379ec17502fdc456c8ff385f8a4d6",
+      "sha256": "10724842af771d8f4e222ce0e67a911c1cb60d9f0b991f3e556b3c777fa94e3e",
+      "unity_size_m": [
+        0.1480923593044281,
+        0.11226701736450195,
+        2.0
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/LegsSide_LegsSide.fbx",
+      "source": "assets/3DModels/LegsSide.glb",
+      "node": "LegsSide",
+      "source_sha256": "a482233925ce248f01495c25ef9e5e40fb83292fb4e0a7f9998b4e49949199ad",
+      "sha256": "bd461f8287a4814f393e204e962333c27af8b22abd29e5a3b401b6b5f2491ece",
+      "unity_size_m": [
+        0.1973620504140854,
+        1.0,
+        0.14867448806762695
+      ]
+    },
+    {
+      "file": "unity/Assets/Resources/Industrial/ConveyorRollerEnd_ConvRollerEnd.fbx",
+      "source": "assets/3DModels/ConveyorRollerEnd.glb",
+      "node": "ConvRollerEnd",
+      "source_sha256": "64430e0c8288a83e2138d4c40d3ddd9dc6ca4e7b3e3590a98815c611b7e3c046",
+      "sha256": "c5b1ad7b56fa812d08cf4868b6eaa7eb587b4c541ddfe28de3db2866593f630c",
+      "unity_size_m": [
+        0.2500000596046448,
+        0.5103387236595154,
+        2.1100001335144043
+      ]
+    }
+  ]
+}

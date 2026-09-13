@@ -1,0 +1,37 @@
+{
+  "verified": "2026-09-13",
+  "dependencies": [
+    {
+      "name": "paho",
+      "repository": "https://github.com/eclipse-paho/paho.mqtt.python",
+      "tag": "v2.1.0",
+      "commit": "af64a4365c6ac5a7a4d339e7b00f44df91353b35",
+      "version": "2.1.0",
+      "licenses": [
+        "third_party/paho-edl-v10.txt",
+        "third_party/paho-epl-v20.txt",
+        "third_party/paho-LICENSE.txt.txt"
+      ]
+    },
+    {
+      "name": "transitions",
+      "repository": "https://github.com/pytransitions/transitions",
+      "tag": "0.9.3",
+      "commit": "f970687f48f807dd5974f59c4d76abed2bd1e7bd",
+      "version": "0.9.3",
+      "licenses": [
+        "third_party/transitions-LICENSE.txt"
+      ]
+    },
+    {
+      "name": "mqttjs",
+      "repository": "https://github.com/mqttjs/MQTT.js",
+      "tag": "v5.15.2",
+      "commit": "88d5ac864a3724f852d5121da35e9f932ffe6f70",
+      "version": "5.15.2",
+      "licenses": [
+        "third_party/mqttjs-LICENSE.md.txt"
+      ]
+    }
+  ]
+}

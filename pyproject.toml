@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "industrial-ai-cell"
+version = "0.1.0"
+description = "BRICS 4.1 conveyor controller for a Unity WebGL training cell"
+requires-python = ">=3.10"
+dependencies = ["paho-mqtt==2.1.0", "transitions==0.9.3", "six==1.17.0"]
+
+[project.scripts]
+industrial-cell = "controller.main:main"
+
+[tool.setuptools]
+packages = ["controller"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+

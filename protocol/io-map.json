@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "source": "competition screenshots 159 and 161; only visible source addresses are preserved",
+  "known_competition_points": [
+    {"name":"detect_material","symbol":"Input4","address":"Q100.4","direction":"input"},
+    {"name":"stop_material","symbol":"Input5","address":"Q100.5","direction":"input"},
+    {"name":"divider_carrier","symbol":"Input6","address":"Q100.6","direction":"input"},
+    {"name":"stop_carrier","symbol":"Input7","address":"Q100.7","direction":"input"},
+    {"name":"divider_extended","symbol":"Input8","address":"Q101.0","direction":"input","derived":"divider >= 0.985"},
+    {"name":"direction_reverse","symbol":"Input14","address":"Q101.6","direction":"input","false":"forward","true":"reverse"},
+    {"name":"color_yellow","symbol":"Input15","address":"Q101.7","direction":"input","false":"blue","true":"yellow"},
+    {"name":"motor","symbol":"Output3","address":"Q0.3","direction":"output"},
+    {"name":"divider","symbol":"Output8","address":"Q1.0","direction":"output"}
+  ],
+  "project_axes": {
+    "divider":{"home":1,"meaning":"1 extended / 0 retracted"},
+    "stopper":{"home":1,"meaning":"1 extended / 0 retracted"},
+    "lift":{"home":0,"meaning":"1 up / 0 down"},
+    "axis1":{"home":0,"stroke_m":1.25},
+    "axis2":{"home":0,"stroke_m":1.25},
+    "hoist":{"home":0,"meaning":"1 down / 0 raised"},
+    "grip":{"home":0,"meaning":"1 closed / 0 open"}
+  }
+}

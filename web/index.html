@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>工业智能实验台 · 皮带分拣</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">工</span><div><strong>工业智能实验台</strong><span>BRICS 2026 · 产线单元智能控制 / 4.1</span></div></div>
+    <div class="connection"><span id="network-dot" class="dot"></span><span id="network">等待仿真加载</span><button id="session-copy" title="复制当前会话">会话 <code id="session"></code></button></div>
+  </header>
+  <main>
+    <section class="workspace">
+      <div class="scene-title"><div><span class="eyebrow">CELL 01</span><h1>皮带输送与分拣单元</h1></div><div class="camera-buttons" aria-label="视角"><button data-camera="overview" class="selected">全景</button><button data-camera="belt">输送</button><button data-camera="sorting">搬运</button></div></div>
+      <div class="viewport">
+        <canvas id="unity-canvas" tabindex="0" aria-label="Unity 三维工业设备仿真"></canvas>
+        <div id="loading"><span class="eyebrow">UNITY WEBGL</span><h2>正在准备实验台</h2><p id="load-detail">加载设备模型与仿真环境</p><progress id="load-progress" max="1" value="0"></progress></div>
+        <div class="scene-caption"><span>01 分隔与检测</span><span>02 挡停与顶升</span><span>03 搬运与分仓</span></div>
+        <div class="scene-hint">拖动旋转 · 滚轮缩放</div>
+      </div>
+      <div class="metrics">
+        <div><span>合格放行</span><strong id="ok-count">0</strong><small>蓝色 · 正向</small></div>
+        <div><span>料仓 1</span><strong id="bin1-count">0</strong><small>黄色 · 任意方向</small></div>
+        <div><span>料仓 2</span><strong id="bin2-count">0</strong><small>蓝色 · 反向</small></div>
+        <div><span>当前工序</span><strong id="step-name" class="step-value">等待连接</strong><small id="step-detail">输入、输出与实际动作闭环</small></div>
+      </div>
+      <details class="inspector" open><summary>实时信号 <span id="packet-stats">等待数据</span></summary><div class="signal-grid" id="signals"></div></details>
+    </section>
+    <aside>
+      <div class="panel-section state-section">
+        <div class="section-label">设备状态 <code id="status-code">Status = 0</code></div>
+        <div class="state-line"><span id="status-lamp" class="state-lamp idle"></span><strong id="status-name">闲置中</strong><span id="ready" class="tag">待连接</span></div>
+        <p id="state-note">等待 Python 控制器连接并完成初始化。</p>
+        <div class="mode"><span>运行模式</span><div><button id="automatic" class="selected">自动</button><button id="manual">手动</button></div></div>
+        <div class="run-buttons"><button id="start" class="primary" disabled>▶ 启动</button><button id="stop" disabled>Ⅱ 暂停</button></div>
+        <div class="reset-row"><button id="reset" disabled>复位 / 清料</button><button id="clear-counts" disabled>清零统计</button></div>
+        <button id="estop" class="emergency" disabled><span class="emergency-icon">■</span><span><strong>急停</strong><small>立即停止运动并清除物料</small></span></button>
+        <button id="release" class="release" hidden>释放急停 · 返回闲置</button>
+      </div>
+      <div class="panel-section">
+        <div class="section-label">上料设置 <label class="check"><input id="auto-feed" type="checkbox" checked> 连续上料</label></div>
+        <label class="field-label" for="recipe">下一件物料</label>
+        <select id="recipe"><option value="blue_forward">蓝色 / 正向 → 合格放行</option><option value="yellow_forward">黄色 / 正向 → 料仓 1</option><option value="blue_reverse">蓝色 / 反向 → 料仓 2</option><option value="yellow_reverse">黄色 / 反向 → 料仓 1</option><option value="empty">空载具 / 无物料</option></select>
+        <button id="feed" class="full" disabled>加入上料队列 <span id="queued">0</span></button>
+        <p class="muted">连续上料按四种组合循环。新载具等待当前工位完成后进入。</p>
+      </div>
+      <div class="panel-section log-section"><div class="section-label">运行记录 <span class="live-label">LIVE</span></div><ol id="event-log" aria-live="polite"></ol></div>
+      <details class="panel-section fault-settings"><summary>练习：模拟设备故障</summary><label class="field-label" for="jam">让指定气缸停止响应</label><select id="jam"><option value="">无故障</option><option value="lift">顶升气缸卡住</option><option value="hoist">搬运升降卡住</option><option value="grip">夹爪卡住</option><option value="stopper">挡停气缸卡住</option></select><p class="muted">排除故障后复位。控制器会报告等待到位超时。</p></details>
+    </aside>
+  </main>
+  <footer><span>Python 控制 · Unity 设备仿真 · EMQX 公共 MQTT</span><span id="latency">仅虚拟设备数据</span><a href="https://github.com/wanbro333/industrial_ai_dev" target="_blank" rel="noopener">项目与使用说明 ↗</a></footer>
+  <script>
+    window.UNITY_CONFIG = {
+      loaderUrl: 'Build/{{{ LOADER_FILENAME }}}',
+      dataUrl: 'Build/{{{ DATA_FILENAME }}}',
+      frameworkUrl: 'Build/{{{ FRAMEWORK_FILENAME }}}',
+      codeUrl: 'Build/{{{ CODE_FILENAME }}}',
+      streamingAssetsUrl: 'StreamingAssets', companyName: 'Industrial AI Lab',
+      productName: 'Conveyor Cell', productVersion: '0.1.0'
+    };
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>

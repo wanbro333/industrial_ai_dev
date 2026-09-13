@@ -22,7 +22,10 @@ unity/[Mm]emoryCaptures/
 unity/*.csproj
 unity/*.sln*
 web/dist/
+unity/Assets/WebGLTemplates/Industrial/
 *.log
+tests/device_harness/bin/
+tests/device_harness/obj/
 .DS_Store
 # User-provided competition materials contain private account details.
 *.pdf
