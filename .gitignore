@@ -1,0 +1,29 @@
+# Local tools, configuration, data and build products
+.cache/
+.venv/
+.env
+.env.*
+!.env.example
+runtime/
+artifacts/
+node_modules/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+unity/[Ll]ibrary/
+unity/[Tt]emp/
+unity/[Oo]bj/
+unity/[Ll]ogs/
+unity/[Uu]ser[Ss]ettings/
+unity/[Bb]uilds/
+unity/[Mm]emoryCaptures/
+unity/*.csproj
+unity/*.sln*
+web/dist/
+*.log
+.DS_Store
+# User-provided competition materials contain private account details.
+*.pdf
+屏幕截图*.png
