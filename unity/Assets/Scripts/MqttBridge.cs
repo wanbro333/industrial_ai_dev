@@ -43,7 +43,7 @@ namespace IndustrialCell
         }
         private void PublishInputs()
         {
-            nextPublish = Time.unscaledTime + .2f;
+            nextPublish = Time.unscaledTime + .25f;
 #if UNITY_WEBGL && !UNITY_EDITOR
             CellTelemetry(JsonUtility.ToJson(Model.I), Model.Epoch);
 #endif
@@ -82,7 +82,12 @@ namespace IndustrialCell
                 case "jam": Model.JamAxis = action.recipe; break;
                 case "camera": GetComponent<CellScene>().SetCamera(action.recipe); return;
             }
-            PublishInputs(); // New epoch / selector / emergency reaches the controller before button events.
+            // Only local device changes need an immediate snapshot before their UI event.
+            // Start/feed/auto-feed requests do not change sensors; sending another full
+            // snapshot for every click wastes the public broker's message quota.
+            if (action.action == "estop" || action.action == "release" || action.action == "reset"
+                || action.action == "stop" || action.action == "mode" || action.action == "clear_counts")
+                PublishInputs();
 #if UNITY_WEBGL && !UNITY_EDITOR
             CellUiEvent(raw);
 #endif

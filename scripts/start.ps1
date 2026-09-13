@@ -1,4 +1,4 @@
-param([int]$Port = 8765)
+param([int]$Port = 8765, [switch]$NoBrowser)
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
 $pythonExe = Join-Path $projectRoot '.venv\Scripts\python.exe'
@@ -25,4 +25,4 @@ try {
 $url = 'http://localhost:' + $Port + '/?session=' + $session
 Write-Output ('Session: ' + $session)
 Write-Output ('Open: ' + $url)
-Start-Process $url
+if (-not $NoBrowser) { Start-Process $url }

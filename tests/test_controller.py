@@ -116,3 +116,29 @@ def test_controller_restart_with_workpiece_requires_reset(inputs):
     output = c.tick(0)
     assert output["status"] == 2 and not output["motion_allowed"]
     assert output["fault"] == "RECOVERY_RESET_REQUIRED"
+
+
+def test_release_requires_ten_running_seconds_and_carrier_exit(cell, inputs):
+    start(cell)
+    cell.auto_feed = False
+    cell.move_step("RELEASE")
+    snapshot = {**inputs, "stopper": 0., "communication_hold": False, "carrier_present": True}
+    cell.ingest(snapshot, cell.epoch, .1)
+    assert cell.tick(.1)["step"] == "RELEASE_DELAY"
+    for n in range(1, 151):
+        now = .1 + n * .05
+        cell.ingest(snapshot, cell.epoch, now)
+        assert cell.tick(now)["step"] == "RELEASE_DELAY"
+    cell.event({"action": "stop"})
+    paused = cell.tick(7.7)["step_elapsed"]
+    for n in range(1, 101):
+        now = 7.7 + n * .05
+        cell.ingest(snapshot, cell.epoch, now)
+        assert cell.tick(now)["step_elapsed"] == paused
+    start(cell, 12.75)
+    for n in range(1, 61):
+        now = 12.75 + n * .05
+        cell.ingest(snapshot, cell.epoch, now)
+        assert cell.tick(now)["step"] == "RELEASE_DELAY", "A carrier still on the belt blocks reset"
+    cell.ingest({**snapshot, "carrier_present": False}, cell.epoch, 15.8)
+    assert cell.tick(15.8)["step"] == "RESET_STOP"

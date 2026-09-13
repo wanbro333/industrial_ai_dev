@@ -3,7 +3,7 @@ import { CellBridge } from './bridge.js';
 const $ = id => document.getElementById(id);
 const steps = { HOME:'初始化', WAIT_CARRIER:'等待载具', DETECT:'输送与检测', APPROACH:'挡停定位', LIFT:'顶升物料',
   PICK_DOWN:'下降取料', GRIP:'夹取确认', PICK_UP:'抬起物料', TRAVEL:'平移至料仓', DROP_DOWN:'下降放料',
-  UNGRIP:'松爪确认', DROP_UP:'抬起夹爪', RETURN:'返回原位', LOWER:'顶升缩回', RELEASE:'载具放行', RESET_STOP:'挡停复位' };
+  UNGRIP:'松爪确认', DROP_UP:'抬起夹爪', RETURN:'返回原位', LOWER:'顶升缩回', RELEASE:'载具放行', RELEASE_DELAY:'放行延时 10 秒', RESET_STOP:'挡停复位' };
 const statuses = ['闲置中','自动运行中','暂停中','急停中'];
 const statusClasses = ['idle','running','paused','estop'];
 const signals = { divider_carrier:'分隔位载具', detect_carrier:'检测位载具', detect_material:'检测位有料', stop_carrier:'挡停位载具', stop_material:'挡停位有料',
@@ -15,6 +15,7 @@ for (const [key,label] of Object.entries(signals)) {
   title.textContent = label; value.textContent = '—'; div.append(dot,title,value); $('signals').append(div);
 }
 let previousStep = '', previousStatus = -1;
+let autoFeedPending = null, autoFeedDeadline = 0;
 const view = {
   session(session) { $('session').textContent = session; },
   log(message) {
@@ -27,6 +28,7 @@ const view = {
     const i = bridge.inputs, o = bridge.outputs || {};
     if (!i) return;
     const fresh = bridge.connected && performance.now() - bridge.controllerAt < 3000;
+    const busy = bridge.uiBusy();
     const status = i.estop ? 3 : (i.communication_hold && o.status === 1) ? 2 : o.status ?? 0;
     $('network').textContent = !bridge.connected ? 'MQTT 连接中' : fresh ? '控制器已同步' : '等待 Python 控制器';
     $('network-dot').classList.toggle('online', fresh);
@@ -36,13 +38,19 @@ const view = {
     $('state-note').textContent = i.estop ? '现场已停止并清料。释放急停后重新初始化。' : i.device_fault || o.fault ||
       (!fresh ? '等待 Python 控制器连接，恢复后请重新启动。' : o.note || '等待初始化反馈');
     $('automatic').classList.toggle('selected', i.automatic); $('manual').classList.toggle('selected', !i.automatic);
-    $('start').disabled = !fresh || !o.ready || !i.automatic || status === 1 || status === 3 || !!o.fault;
+    $('start').disabled = busy || !fresh || !o.ready || !i.automatic || status === 1 || status === 3 || !!o.fault;
     $('stop').disabled = status !== 1; $('estop').disabled = status === 3;
-    $('reset').disabled = !fresh || (o.status !== 0 && o.status !== 2) || i.estop;
-    $('clear-counts').disabled = status !== 0;
+    $('reset').disabled = busy || !fresh || (o.status !== 0 && o.status !== 2) || i.estop;
+    $('clear-counts').disabled = busy || status !== 0;
+    $('automatic').disabled = busy;
+    $('release').disabled = busy;
+    $('jam').disabled = busy;
     $('release').hidden = !i.estop;
-    $('feed').disabled = !fresh || status === 3;
-    if (typeof o.auto_feed === 'boolean') $('auto-feed').checked = o.auto_feed;
+    $('feed').disabled = busy || !fresh || status === 3;
+    if (autoFeedPending !== null && (o.auto_feed === autoFeedPending || performance.now() > autoFeedDeadline))
+      autoFeedPending = null;
+    if (typeof o.auto_feed === 'boolean') $('auto-feed').checked = autoFeedPending ?? o.auto_feed;
+    $('auto-feed').disabled = busy || !fresh || autoFeedPending !== null;
     $('queued').textContent = o.queued || 0;
     $('ok-count').textContent = i.ok_count; $('bin1-count').textContent = i.bin1_count; $('bin2-count').textContent = i.bin2_count;
     $('step-name').textContent = steps[o.step] || '等待连接';
@@ -64,7 +72,11 @@ for (const action of ['start','stop','reset','estop','release']) $(action).addEv
 $('automatic').onclick = () => bridge.act('mode',true);
 $('manual').onclick = () => bridge.act('mode',false);
 $('clear-counts').onclick = () => bridge.act('clear_counts');
-$('auto-feed').onchange = event => bridge.act('auto_feed',event.target.checked);
+$('auto-feed').onchange = event => {
+  autoFeedPending = event.target.checked; autoFeedDeadline = performance.now() + 5000;
+  $('auto-feed').disabled = true;
+  bridge.act('auto_feed', autoFeedPending);
+};
 $('feed').onclick = () => bridge.act('feed',false,$('recipe').value);
 $('jam').onchange = event => bridge.act('jam',false,event.target.value);
 $('session-copy').onclick = async () => { try { await navigator.clipboard.writeText(bridge.protocol.session); view.log('会话编号已复制'); } catch { view.log('会话编号显示在右上角，可手动复制'); } };

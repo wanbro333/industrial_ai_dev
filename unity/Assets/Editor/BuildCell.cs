@@ -20,6 +20,15 @@ public static class BuildCell
         if (AssetDatabase.LoadAssetAtPath<Material>(anchorPath) == null)
             AssetDatabase.CreateAsset(new Material(Shader.Find("Standard")), anchorPath);
         // A Resources material keeps the runtime-created equipment shader in player builds.
+        Directory.CreateDirectory("Assets/Resources/Primitives");
+        foreach (var shape in new[] { PrimitiveType.Cube, PrimitiveType.Cylinder })
+        {
+            var primitive = GameObject.CreatePrimitive(shape);
+            UnityEngine.Object.DestroyImmediate(primitive.GetComponent<Collider>());
+            primitive.GetComponent<Renderer>().sharedMaterial = AssetDatabase.LoadAssetAtPath<Material>(anchorPath);
+            PrefabUtility.SaveAsPrefabAsset(primitive, "Assets/Resources/Primitives/" + shape + ".prefab");
+            UnityEngine.Object.DestroyImmediate(primitive);
+        }
         Directory.CreateDirectory("Assets/Scenes");
         EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), "Assets/Scenes/Cell.unity");
         EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene("Assets/Scenes/Cell.unity", true) };

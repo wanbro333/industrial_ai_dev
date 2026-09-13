@@ -68,17 +68,21 @@ class Runtime:
     def process(self, stream: str, raw: bytes, retained: bool, now: float) -> None:
         if stream == "_disconnect":
             self.core.input_at = -float("inf")
-            self.core._pause()
+            self.core.pause()
             return
         if retained:
             self.rejected += 1
             return
         try:
             msg = decode(raw, self.session)
-        except ValueError:
+        except ValueError as exc:
+            if stream == "ui/events":
+                LOG.warning("Rejected UI envelope: %s", exc)
             self.rejected += 1
             return
         if msg["sender"] != "simulator" or msg["epoch"] in self.retired_epochs:
+            if stream == "ui/events":
+                LOG.warning("Rejected UI sender or retired epoch: %s", msg["id"])
             self.rejected += 1
             return
         if stream == "device/inputs":
@@ -98,9 +102,12 @@ class Runtime:
                 self.retired_epochs.add(previous_epoch)
         elif msg["peer"] == self.sim_peer and msg["epoch"] == self.core.epoch and self.guard.accept(stream, msg):
             if stream == "ui/events":
+                LOG.info("UI action=%s id=%s", msg["data"].get("action"), msg["id"])
                 self.core.event({**msg["data"], "id": msg["id"]})
             elif stream == "device/ack":
                 self.applied_ack = str(msg["data"].get("command_id", ""))
+        elif stream == "ui/events":
+            LOG.warning("Rejected UI binding or sequence: %s", msg["id"])
 
     def run(self, stop: threading.Event | None = None) -> None:
         stop = stop or threading.Event()
@@ -126,7 +133,7 @@ class Runtime:
                     LOG.info("Status=%s step=%s fault=%s", *summary)
                     previous = summary
                 if self.connected.is_set() and self.core.epoch != "unbound":
-                    if changed or now - last_publish >= .1:
+                    if changed or now - last_publish >= .2:
                         msg = self.writer.make(self.core.epoch, output)
                         # No application-level offline queue; stale retransmissions are rejected by TTL/epoch.
                         self.client.publish(self.prefix + "control/outputs", json.dumps(msg), qos=1, retain=False)

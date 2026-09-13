@@ -2,12 +2,14 @@
 
 面向金砖大赛“工业智能应用与开发”样题 4.1 的练习工程。Python 决定状态和工序，Unity 模拟设备动作及传感器，通过 `broker.emqx.io` 公共 MQTT 服务闭环通信。
 
-**当前阶段：控制器、C# 设备模型、Unity 场景与网页桥接已实现；实际 Unity WebGL 构建和浏览器整体验收正在等待本机许可证激活。** 纯 C# 闭环测试或消息往返成功不代表 WebGL 已验收。最新记录见 [验收记录](docs/validation.md)。
+**可运行版本已完成：真实 Unity WebGL 场景经公共 EMQX 与 Python 闭环联调通过。**最新记录见 [验收记录](docs/validation.md)。
+
+![真实 Unity WebGL 分拣场景](docs/screenshots/webgl-sorted.png)
 
 ## 已实现的功能
 
 - 四状态：闲置 0、自动 1、暂停 2、急停 3；对应黄常亮、绿常亮、黄/红亮 1 秒灭 1 秒。
-- 初始化挡停伸出、顶升缩回；按真实位置反馈推进分隔、检测、挡停、顶升和搬运步骤。
+- 初始化挡停伸出、顶升缩回；按真实位置反馈推进分隔、检测、挡停、顶升和搬运步骤；挡停缩回后延时 10 秒并确认载具离开。
 - 蓝色正向放行；黄色任意方向进料仓 1；蓝色反向进料仓 2。
 - 两个平移气缸、升降和夹爪；暂停保留位置和夹取关系；急停清除虚拟物料，复位后等待重新启动。
 - 单载具串行生产、连续混合上料、指定物料排队、空载具、统计和气缸卡住练习。
@@ -77,7 +79,10 @@ Unity Hub 中先登录并激活自己的许可证。构建过程生成网页模�
 .venv\Scripts\python.exe -m pip install -r requirements-dev.txt
 .\scripts\test.ps1
 npm.cmd --prefix web run test:mqtt
+.\scripts\test-webgl.ps1
 ```
+
+`test-webgl.ps1` 使用本项目 D 盘缓存中的 Chromium，实际加载 Unity WebGL，测试分拣流程、页面刷新、控制器重启、执行暂停和 WSS 断开恢复。需要公网连接，报告保存在 `artifacts/`。
 
 Python 测试直接驱动 `unity/Assets/Scripts/DeviceModel.cs` 编译的测试进程，检查实际设备位置、抓取成功和分仓计数；没有另写一份 Python 仿真来替代 Unity 设备逻辑。公网探针仅在随机会话主题收发虚拟测试消息。
 
@@ -100,6 +105,6 @@ Python 测试直接驱动 `unity/Assets/Scripts/DeviceModel.cs` 编译的测试�
 
 ## 提交与回退
 
-以阶段性 Git 提交作为检查点；已推送的设计基线为 `c8ecf66`。后续有效检查点写入验收记录。
+以阶段性 Git 提交作为检查点：`c8ecf66` 为设计基线，`fab4aa9` 为源码实现基线。WebGL 联调完成的检查点见 Git 最新提交及验收记录。
 
 若同一问题多次失败，先保留日志与当前工作分支，再从最近有效提交创建修复分支；已经推送的错误提交优先用 `git revert` 撤销。不要覆盖远端历史，也不要把 `.venv`、Unity Library、安装包或运行会话提交进仓库。

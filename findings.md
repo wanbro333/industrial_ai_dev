@@ -69,3 +69,11 @@ Paho SECURITY.md：https://github.com/eclipse-paho/paho.mqtt.python/blob/master/
 - Python 使用独立环境；现有 3.14 先做 Paho/transitions 兼容验证，通过即保留，不在讨论阶段擅自安装另一版本。
 - 官方 WebGL 网络与 JS 桥接文档支持浏览器 WebSocket + JavaScript 插件思路，不采用原生 TCP 套接字作为浏览器通道。
 - Unity 后台标签页会受到浏览器节流：https://docs.unity3d.com/cn/2023.2/Manual/webgl-performance.html 。方案必须处理不可见/冻结/刷新后的状态同步，不能依赖 Run In Background 保证后台持续实时运行。
+
+## 实施后核实（2026-09-13）
+
+- Unity 6000.3.24f1 + Web Build Support 安装在 D 盘并已实际编译 WebGL；Paho/transitions 兼容本机 Python 3.14。
+- 37 个 OIP GLB 网格已转换为 FBX，映射、提交与 SHA-256 在 third_party/oip-assets.json。依赖锁定和本次已知漏洞审计已完成，早期选型阶段“未审计”描述为当时状态。
+- 公共 EMQX 联调中，MQTT 5 PUBACK 返回过 151 / Quota exceeded；是发布端额度拒绝，不能把 MQTT 3.1.1 PUBACK 当成控制器已收到。基于实测把输出降至 5 Hz、设备输入 4 Hz、诊断 ACK 0.5 Hz；不为每次普通按钮点击重复发送输入快照。界面普通操作等待控制器 ui_ack，停止和急停本地优先；失败提示重试，不自动重试启动。
+- EMQX 支持通过 PUBACK 表达 QoS 1 额度拒绝，参考：https://docs.emqx.com/en/emqx/latest/rate-limit/rate-limit.html 。本项目不假定公共服务长期具有固定配额。
+- 本机无头 Chromium 中 Page.setWebLifecycleState 未实际冻结可见页面，未将该无效探针列为通过。改用 CDP Debugger.pause/resume 真正暂停 JS/WASM 执行 3.5 秒，配合真实 WSS 关闭/重连测试恢复保护；visibilitychange/freeze/resume 处理路径另有源代码测试。

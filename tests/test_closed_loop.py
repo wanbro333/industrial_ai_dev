@@ -133,3 +133,19 @@ def test_new_user_start_continues_after_local_hold(loop):
     for _ in range(20):
         after = exchange()["inputs"]
     assert not after["communication_hold"] and after["carrier_x"] > before["carrier_x"]
+
+
+def test_continuous_mixed_feed_completes_all_four_recipes_once(loop):
+    c, exchange = loop
+    c.auto_feed = True
+    c.event({"action": "start", "id": "continuous-start"})
+    for _ in range(5000):
+        r = exchange()
+        i = r["inputs"]
+        if i["ok_count"] + i["bin1_count"] + i["bin2_count"] == 4:
+            c.auto_feed = False
+        if c.step == "WAIT_CARRIER" and not c.auto_feed:
+            break
+    assert not c.fault
+    assert (i["ok_count"], i["bin1_count"], i["bin2_count"]) == (1, 2, 1)
+    assert not i["carrier_present"] and not i["holding"]

@@ -14,6 +14,7 @@ New-Item -ItemType Directory -Force -Path $logDir | Out-Null
 $unityProject = Join-Path $projectRoot 'unity'
 $buildLog = Join-Path $logDir 'unity-build.log'
 $buildArgs = @('-batchmode','-nographics','-quit','-projectPath',('"' + $unityProject + '"'),'-buildTarget','WebGL','-executeMethod','BuildCell.WebGL','-logFile',('"' + $buildLog + '"'))
-$process = Start-Process -FilePath $UnityEditor -ArgumentList $buildArgs -WindowStyle Hidden -Wait -PassThru
+$process = Start-Process -FilePath $UnityEditor -ArgumentList $buildArgs -WindowStyle Hidden -PassThru
+$process.WaitForExit()
 if ($process.ExitCode -ne 0) { throw ('Unity build failed. See ' + $buildLog) }
 Write-Output ('WebGL ready: ' + (Join-Path $projectRoot 'web\dist\index.html'))

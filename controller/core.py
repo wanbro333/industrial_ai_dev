@@ -116,6 +116,10 @@ class CellController:
     def event(self, event: dict) -> None:
         self.events.append(event)
 
+    def pause(self) -> None:
+        if self.status == Status.RUNNING:
+            self._pause()
+
     def at(self, **targets: float) -> bool:
         return all(abs(self.inputs.get(k, -100) - v) <= .015 for k, v in targets.items())
 
@@ -143,7 +147,7 @@ class CellController:
             self._last_estop = False
 
         if not comm_ok or not visible or pause_requested or not automatic:
-            self._pause()
+            self.pause()
         if not comm_ok:
             self.fault = "SIMULATOR_TIMEOUT"
         elif not visible:
@@ -152,10 +156,10 @@ class CellController:
             self.fault = ""
         if self.inputs.get("device_fault"):
             self.fault = "DEVICE:" + str(self.inputs["device_fault"])
-            self._pause()
+            self.pause()
         if (self.status == Status.RUNNING and self.inputs.get("communication_hold")
                 and self.run_token and self.inputs.get("run_token_seen") == self.run_token):
-            self._pause()
+            self.pause()
 
         for event in events:
             action = event.get("action")
@@ -211,7 +215,7 @@ class CellController:
 
     def _sequence(self) -> None:
         i, t, step = self.inputs, self.targets, self.step
-        self.motor = step in ("WAIT_CARRIER", "DETECT", "APPROACH", "RELEASE")
+        self.motor = step in ("WAIT_CARRIER", "DETECT", "APPROACH", "RELEASE", "RELEASE_DELAY")
         if step == "WAIT_CARRIER":
             t.update(HOME)
             t["divider"] = 0.
@@ -274,7 +278,12 @@ class CellController:
                 self.move_step("RELEASE")
         elif step == "RELEASE":
             t["stopper"] = 0.
-            if not i["carrier_present"]:
+            if self.at(stopper=0.):
+                self.move_step("RELEASE_DELAY")
+        elif step == "RELEASE_DELAY":
+            # Screenshot 160 shows step 11: delay 10 seconds after stopper retraction.
+            # The carrier must also have left; elapsed time alone cannot reset the stop.
+            if self.step_elapsed >= 10.0 and not i["carrier_present"]:
                 self.motor = False
                 self.feed_id = self.result = self.material_id = ""
                 self.move_step("RESET_STOP")

@@ -10,3 +10,8 @@
 *.fbx binary
 *.glb binary
 *.png binary
+*.meta text eol=lf whitespace=-blank-at-eol
+*.unity text eol=lf whitespace=-blank-at-eol
+*.prefab text eol=lf whitespace=-blank-at-eol
+*.asset text eol=lf whitespace=-blank-at-eol
+*.mat text eol=lf whitespace=-blank-at-eol

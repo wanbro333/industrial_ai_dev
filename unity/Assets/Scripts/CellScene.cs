@@ -70,16 +70,17 @@ namespace IndustrialCell
         private Transform Surface(string name, Vector3 position, Vector3 size, Material material,
                                   PrimitiveType shape = PrimitiveType.Cube)
         {
-            var obj = GameObject.CreatePrimitive(shape);
+            var source = Resources.Load<GameObject>("Primitives/" + shape);
+            if (source == null) throw new System.InvalidOperationException("Rebuild the Cell scene to generate primitive mesh prefabs");
+            var obj = Instantiate(source);
             obj.name = name;
             obj.transform.position = position;
             obj.transform.localScale = size;
             obj.GetComponent<Renderer>().sharedMaterial = material;
-            Destroy(obj.GetComponent<Collider>());
             return obj.transform;
         }
 
-        private void Label(string text, Vector3 position, float size = .17f)
+        private void Label(string text, Vector3 position, float size = .045f)
         {
             var obj = new GameObject(text);
             obj.transform.position = position;
@@ -94,14 +95,14 @@ namespace IndustrialCell
         private void BuildCell()
         {
             RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat;
-            RenderSettings.ambientLight = new Color(.70f,.76f,.73f);
+            RenderSettings.ambientLight = new Color(.38f,.43f,.41f);
             var light = new GameObject("Soft daylight").AddComponent<Light>();
-            light.type = LightType.Directional; light.intensity = 1.15f;
+            light.type = LightType.Directional; light.intensity = .78f;
             light.shadows = LightShadows.Soft; light.shadowStrength = .45f;
             light.transform.rotation = Quaternion.Euler(50,-30,0);
-            var floor = Mat("Workshop floor", new Color(.85f,.9f,.86f));
+            var floor = Mat("Workshop floor", new Color(.68f,.75f,.71f));
             Surface("Floor",new Vector3(0,-.06f,0),new Vector3(28,.1f,22),floor);
-            var grid = Mat("Floor grid",new Color(.79f,.85f,.80f));
+            var grid = Mat("Floor grid",new Color(.62f,.70f,.65f));
             for(int n=-10;n<=10;n++)
             {
                 Surface("Grid X",new Vector3(n,0,0),new Vector3(.008f,.002f,20),grid);

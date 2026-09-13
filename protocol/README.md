@@ -10,7 +10,7 @@
 | `device/ack` | Unity → Python | 命令 ID 和 applied/rejected；不代表设备已到位 |
 | `health/controller` | Python → Unity/观察工具 | 控制器存活信息；设备运动看门狗以有效输出为准 |
 
-控制循环 20 Hz，输出约 10 Hz；设备完整输入 5 Hz，关键离散信号变化时立即补发。各实际气缸位置为 0–1，端点容差 0.015。关键业务消息 QoS 1、`retain=false`。健康遗嘱仅用于可观察性，运动不依赖 broker 是否在线。
+控制循环 20 Hz，输出约 5 Hz；设备完整输入 4 Hz，关键离散信号变化时立即补发。各实际气缸位置为 0–1，端点容差 0.015。关键业务消息 QoS 1、`retain=false`。诊断 ACK 最多每 2 秒一次。浏览器使用 MQTT 5，以显示公共 broker 的配额拒绝原因；普通界面操作等待控制器确认，暂停和急停立即处理。健康遗嘱仅用于可观察性，运动不依赖 broker 是否在线。
 
 ```json
 {"v":1,"session":"training-001","epoch":"scene-guid","sender":"controller","peer":"process-guid","seq":123,"id":"process-guid:123","sent_ms":1789280000000,"ttl_ms":3000,"data":{"status":2,"motion_allowed":false}}
@@ -29,3 +29,5 @@
 - 初始化可以在状态 0 中回原位；状态 2 全部工艺运动冻结，计时冻结。网络与指示灯继续运行。
 
 缺失的竞赛地址不推测填写，具体映射见 `io-map.json`。传感器根据 C# 设备模型中的实际位置和物料姿态属性产生；Python 从颜色/方向输入判断类别，Unity 仅按实际放料位置计数，不按颜色自行分拣。
+
+`RELEASE` 等挡停缩回反馈，之后 `RELEASE_DELAY` 累计 10 秒运行时间（截图 160 所示延时），同时要求载具离开后才挡停复位。暂停期间延时冻结；这些语义步骤没有冒充未提供的原题全部步骤号。

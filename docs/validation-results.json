@@ -1,0 +1,51 @@
+{
+  "verified": "2026-09-13",
+  "unity": "6000.3.24f1",
+  "python_tests": 35,
+  "web_unit_tests": 6,
+  "browser": "Chromium 153.0.8010.12",
+  "broker": "broker.emqx.io",
+  "browser_checks": {
+    "webgl-acceptance": [
+      "Unity WebGL loads and Python handshake reaches ready",
+      "Pause freezes actual conveyor position",
+      "Blue forward is released once",
+      "Manual selector pauses; automatic selector alone does not resume",
+      "yellow_forward reaches expected physical destination",
+      "blue_reverse reaches expected physical destination",
+      "yellow_reverse reaches expected physical destination",
+      "empty reaches expected physical destination",
+      "Emergency stop clears a held workpiece and carrier locally",
+      "Emergency release homes and remains idle",
+      "Controller loss freezes equipment; restart with workpiece requires reset",
+      "Browser refresh creates a new epoch without automatic start",
+      "No browser runtime errors"
+    ],
+    "webgl-lifecycle": [
+      "Unity WebGL loads and Python handshake reaches ready",
+      "Actual browser execution suspension/resumption holds position and requires a new start",
+      "Actual WSS disconnect/reconnect holds the workpiece without automatic resumption",
+      "Explicit start resumes after connection recovery",
+      "No browser runtime errors"
+    ]
+  },
+  "build_sha256": {
+    "app.js": "aa0d776b0b11a4fbe7b8cd13ef631214658c21a21d9a864635235fa08364a789",
+    "app.js.LEGAL.txt": "dd7fedeeba6f49caddf36ac480c24cdd5bdb6e2544364bab147c56a1774d12bd",
+    "index.html": "ab0f474621fbdf8ded3932a00eaca195ec92df46239f0e2ea5449b15dc731ccc",
+    "style.css": "673831d6f21466bdbed893eacbd927b2b3257825c9c7beb2f9a8249460fb6ab9",
+    "Build/dist.data": "36da2f52260b1e9851c84c5ae15ed8e740036eaa74c2d6cd2f6972268162cbb2",
+    "Build/dist.framework.js": "b4b73e4f041fb1bca05435c93e3e35bb6c9d9cbb62ac64480d5873cf7d46e5a9",
+    "Build/dist.loader.js": "c2fd88d5461aa1192a71f7898f6c040a42d0a5e40276caa3c70c4691e2610814",
+    "Build/dist.wasm": "ca74ae53d15d7e3a32ed2be1d05d7dbc2653b79edd14fed6be5a50fdbdab4910",
+    "ThirdParty/dependencies.json": "6960cdd9f2e05c549402d0990709cf301a0ebc9be185fd449dc5cd86713d54f3",
+    "ThirdParty/mqttjs-LICENSE.md.txt": "cf984ce575e97a3dc22e85ad0bccaa230157683b535d9b556e05fef71103913a",
+    "ThirdParty/oip-assets.json": "aadd0f157bee27affbf46d4365c4966cf1213b35b5c72a92232d393c02812bf3",
+    "ThirdParty/OIP-LICENSE.txt": "7df94d38c1acf252388708fa243383f1b2f22ad4e5eedb3caeaeda83c81b0e50",
+    "ThirdParty/paho-edl-v10.txt": "b4f57212d0394eecdd315af5ec7f86abf2d36db091bc5a23ff005b471172854f",
+    "ThirdParty/paho-epl-v20.txt": "6c39067d3ba9d479c7a7256d827d8de6c6541c786ec77a25c1ac0cdff8a30e23",
+    "ThirdParty/paho-LICENSE.txt.txt": "c7b4f9952efa7d10e6da753772afdf29d15d313936af42cae934a60d28a34929",
+    "ThirdParty/README.md": "fecbf4e4fcd2c5a509b39d582e818fe44874e7285e320dd8b542fbdb813f36a4",
+    "ThirdParty/transitions-LICENSE.txt": "c3ad2b4b406883c8ffed1454b32ac1111e7f2776fdbdf000697391348e6f7ec9"
+  }
+}
